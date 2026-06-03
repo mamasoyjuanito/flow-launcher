@@ -1,130 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flow Launcher - Minimalist & Elegant</title>
+    <title>Flow Launcher</title>
     <style>
-        :root {
-            --bg-color: #05080f;
-            --text-main: #ffffff;
-            --text-muted: #8b9bb4;
-            --accent: #FFC107; /* Amber to match the app's accent */
-        }
-        body {
+        * {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: Inter, Arial, sans-serif;
+            background: #050816;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            line-height: 1.6;
+            justify-content: space-between;
+            padding: 80px 10%;
+            position: relative;
         }
-        .container {
-            max-width: 900px;
-            padding: 4rem 2rem;
-            text-align: center;
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            right: -200px;
+            top: 50%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, #7c3aed55, #06b6d455, transparent 70%);
+            transform: translateY(-50%);
+            filter: blur(80px);
         }
+
+        .badge {
+            display: inline-block;
+            padding: 10px 18px;
+            border: 1px solid #2b3563;
+            border-radius: 999px;
+            margin-bottom: 20px;
+            color: #9bb4ff;
+        }
+
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 800;
-            letter-spacing: -1px;
+            font-size: 5rem;
+            line-height: 0.95;
+            margin-bottom: 20px;
         }
+
         .subtitle {
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            font-weight: 300;
+            max-width: 560px;
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 35px;
         }
+
+        .gradient {
+            background: linear-gradient(90deg, #22d3ee, #3b82f6, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 16px 28px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .primary {
+            background: linear-gradient(90deg, #22d3ee, #3b82f6, #d946ef);
+            color: white;
+        }
+
+        .secondary {
+            border: 1px solid #334155;
+            color: white;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            padding: 16px;
+            background: rgba(255, 255, 255, .04);
+            border-radius: 16px;
+        }
+
+        .phone {
+            width: 320px;
+            height: 650px;
+            border-radius: 40px;
+            background: linear-gradient(180deg, #0f172a, #111827);
+            border: 1px solid #334155;
+            box-shadow: 0 0 60px rgba(59, 130, 246, .3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #94a3b8;
+        }
+
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            color: #94a3b8;
+            max-width: 700px;
+            margin-bottom: 50px;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            padding: 30px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .04);
+        }
+
+        .card h3 {
+            margin-bottom: 20px;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            line-height: 2;
+        }
+
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
         }
-        .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 2rem;
+
+        .feature {
+            background: rgba(255, 255, 255, .04);
+            padding: 24px;
             border-radius: 24px;
-            backdrop-filter: blur(10px);
-            text-align: left;
         }
-        .feature-card h3 {
-            color: var(--accent);
-            margin-top: 0;
-            font-size: 1.25rem;
+
+        .feature h4 {
+            margin: 15px 0;
         }
-        .feature-card p {
-            color: var(--text-muted);
-            margin: 0;
-            font-size: 1rem;
-        }
-        .footer {
-            margin-top: 6rem;
-            padding: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
+
+        .cta {
             text-align: center;
-            color: var(--text-muted);
         }
-        a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .btn {
+
+        .cta a {
             display: inline-block;
-            background: var(--accent);
-            color: #000;
-            padding: 1rem 2.5rem;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-top: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 30px;
         }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255, 193, 7, 0.2);
-            text-decoration: none;
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        @media(max-width:900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 50px;
+            }
+
+            h1 {
+                font-size: 3.5rem
+            }
+
+            .comparison {
+                grid-template-columns: 1fr
+            }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Flow Launcher</h1>
-        <div class="subtitle">Focus on what matters. A beautiful, distraction-free Android home screen.</div>
-        
-        <a href="#" class="btn">Download APK (Soon)</a>
 
-        <div class="features">
-            <div class="feature-card">
-                <h3>Minimalist Design</h3>
-                <p>Say goodbye to cluttered screens. Flow Launcher organizes your apps in a sleek, alphabetical list with smooth elastic scrolling.</p>
+<body>
+
+    <section class="hero">
+        <div>
+            <div class="badge">Minimalist Android Launcher</div>
+
+            <h1>Your phone,<br><span class="gradient">simplified.</span></h1>
+
+            <p class="subtitle">
+                Flow Launcher removes clutter and puts everything within reach.
+                Fast search, one-handed navigation and a clean experience designed for focus.
+            </p>
+
+            <div class="buttons">
+                <a class="btn primary" href="https://play.google.com/apps/testing/com.soyjuanito.flow_launcher">Get it on Google Play</a>
+                <a class="btn secondary" href="#features">Learn More</a>
             </div>
-            <div class="feature-card">
-                <h3>Neomorphic Media Player</h3>
-                <p>Control your music without leaving your home screen. A gorgeous, translucent media player that adapts to your favorite music apps.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Privacy First</h3>
-                <p>Your data stays on your device. We don't collect, track, or share any of your usage habits. Pure functionality with zero compromises.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Highly Customizable</h3>
-                <p>Adjust clock fonts, align your apps for left or right-handed use, dynamically resize icons, and manage your favorite apps effortlessly.</p>
+
+            <div class="stats">
+                <div class="stat">⚡ Fast Access</div>
+                <div class="stat">🎨 Material You</div>
+                <div class="stat">🔒 Privacy Friendly</div>
             </div>
         </div>
-    </div>
 
-    <div class="footer">
-        <p>&copy; 2026 Flow Launcher. All rights reserved.</p>
-        <p><a href="privacy.html">Privacy Policy</a></p>
-    </div>
+        <div class="phone">
+            <img style="width: 100%;" src="./captura_2.jpeg" />
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Why Flow?</h2>
+        <p class="section-subtitle">
+            Most launchers give you more. Flow gives you less clutter and more focus.
+        </p>
+
+        <div class="comparison">
+            <div class="card">
+                <h3>Traditional Launcher</h3>
+                <ul>
+                    <li>Too many icons</li>
+                    <li>Visual clutter</li>
+                    <li>Hard to find apps</li>
+                    <li>Constant distractions</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Flow Launcher</h3>
+                <ul>
+                    <li>Clean app list</li>
+                    <li>Alphabet quick access</li>
+                    <li>Large widgets</li>
+                    <li>Designed for focus</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <h2 class="section-title">Everything you need. One swipe away.</h2>
+
+        <div class="features">
+            <div class="feature">
+                <h4>🔎 Instant Search</h4>
+                <p>Find apps in seconds.</p>
+            </div>
+
+            <div class="feature">
+                <h4>A-Z Navigation</h4>
+                <p>Jump directly to any app.</p>
+            </div>
+
+            <div class="feature">
+                <h4>🎵 Media Widgets</h4>
+                <p>Control your music effortlessly.</p>
+            </div>
+
+            <div class="feature">
+                <h4>🎨 Material You</h4>
+                <p>Adaptive colors that match your style.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2 class="section-title">Ready to simplify your phone?</h2>
+        <a class="btn primary" href="https://play.google.com/apps/testing/com.soyjuanito.flow_launcher">Download Flow Launcher</a>
+    </section>
+
+    <footer>
+        © Flow Launcher
+    </footer>
+
 </body>
+
 </html>
